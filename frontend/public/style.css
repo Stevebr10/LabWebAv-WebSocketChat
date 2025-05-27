@@ -1,0 +1,252 @@
+/* Estilos Generales y Modo Claro/Oscuro */
+:root {
+    --super-saiyan-blue: #00A8F3;
+    --light-bg: url('img/background-light.jpg') no-repeat center center fixed;
+    --dark-bg: url('img/background-dark.jpg') no-repeat center center fixed;
+    --light-text: #212529;
+    --dark-text: #f8f9fa;
+    --light-card-bg: rgba(255, 255, 255, 0.9);
+    --dark-card-bg: rgba(33, 37, 41, 0.9); /* Un poco más oscuro para Bootstrap dark */
+    --light-message-sent-bg: #e0f7fa;
+    --light-message-sent-text: #004d40;
+    --light-message-received-bg: #f1f1f1;
+    --light-message-received-text: #212529;
+    --dark-message-sent-bg: #01579b; /* Azul más oscuro para contraste */
+    --dark-message-sent-text: #e1f5fe;
+    --dark-message-received-bg: #424242; /* Gris oscuro para contraste */
+    --dark-message-received-text: #f5f5f5;
+    --font-size-base: 1rem; /* 16px */
+    --font-size-lg: 1.15rem; /* Aproximadamente 18px */
+    --font-size-xl: 1.25rem; /* 20px */
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    background-size: cover !important;
+    font-size: var(--font-size-base);
+}
+
+body[data-bs-theme="light"] {
+    background: var(--light-bg);
+    color: var(--light-text);
+}
+
+body[data-bs-theme="dark"] {
+    background: var(--dark-bg);
+    color: var(--dark-text);
+}
+
+body[data-bs-theme="dark"] .navbar {
+    background-color: rgba(0, 0, 0, 0.8) !important;
+    border-bottom: 1px solid #444;
+}
+body[data-bs-theme="light"] .navbar {
+    background-color: rgba(255, 255, 255, 0.8) !important;
+    border-bottom: 1px solid #ddd;
+}
+
+
+.super-saiyan-blue-text {
+    color: var(--super-saiyan-blue) !important;
+    text-shadow: 0 0 5px rgba(0, 168, 243, 0.7);
+}
+
+.super-saiyan-blue-bg {
+    background-color: var(--super-saiyan-blue) !important;
+    border-color: var(--super-saiyan-blue) !important;
+    color: white !important;
+}
+.super-saiyan-blue-bg:hover {
+    background-color: #0086c3 !important; /* Un azul un poco más oscuro para el hover */
+    border-color: #0086c3 !important;
+}
+
+
+/* Pantalla de Login */
+.login-box {
+    max-width: 400px;
+    width: 90%;
+}
+body[data-bs-theme="light"] .login-box {
+    background-color: var(--light-card-bg);
+    border: 1px solid #ccc;
+}
+body[data-bs-theme="dark"] .login-box {
+    background-color: var(--dark-card-bg);
+    border: 1px solid #555;
+}
+
+
+/* Contenedor Principal del Chat */
+.main-container {
+    padding-top: 0;
+    padding-bottom: 0;
+    min-height: 100vh;
+}
+
+.chat-container-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Alinea el chat container arriba */
+    padding-top: 80px; /* Espacio para la navbar fija */
+    min-height: calc(100vh - 70px); /* Ajusta según la altura de tu input area */
+}
+
+#chatContainer {
+    max-width: 800px; /* Ancho máximo del chat */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 120px); /* Altura del chat, dejando espacio para navbar e input */
+    padding-bottom: 20px; /* Espacio en la parte inferior */
+}
+
+body[data-bs-theme="light"] #chatContainer {
+    background-color: var(--light-card-bg);
+    border-radius: 8px;
+}
+body[data-bs-theme="dark"] #chatContainer {
+    background-color: var(--dark-card-bg);
+    border-radius: 8px;
+}
+
+/* Área de Mensajes */
+.messages-area {
+    flex-grow: 1;
+    overflow-y: auto;
+    margin-bottom: 1rem !important; /* Bootstrap class mb-3 */
+    border: 1px solid #dee2e6;
+    font-size: var(--font-size-lg); /* Tamaño de letra considerable */
+}
+body[data-bs-theme="light"] .messages-area {
+    background-color: rgba(248, 249, 250, 0.8); /* Un fondo ligeramente transparente */
+    border-color: #ccc;
+}
+body[data-bs-theme="dark"] .messages-area {
+    background-color: rgba(52, 58, 64, 0.8); /* Un fondo oscuro ligeramente transparente */
+    border-color: #555;
+}
+
+/* Burbujas de Mensajes */
+.message {
+    padding: 10px 15px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    max-width: 75%;
+    word-wrap: break-word;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.message .username {
+    font-weight: bold;
+    margin-bottom: 4px;
+    font-size: 0.9em;
+}
+
+.message .text {
+    margin-bottom: 4px;
+}
+
+.message .timestamp {
+    font-size: 0.75em;
+    align-self: flex-end;
+    opacity: 0.7;
+}
+
+/* Mensajes Enviados (izquierda) */
+.message.sent {
+    align-self: flex-start;
+    margin-right: auto; /* Empuja a la izquierda */
+}
+body[data-bs-theme="light"] .message.sent {
+    background-color: var(--light-message-sent-bg);
+    color: var(--light-message-sent-text);
+    border-bottom-left-radius: 5px;
+}
+body[data-bs-theme="light"] .message.sent .username {
+    color: var(--super-saiyan-blue);
+}
+
+body[data-bs-theme="dark"] .message.sent {
+    background-color: var(--dark-message-sent-bg);
+    color: var(--dark-message-sent-text);
+    border-bottom-left-radius: 5px;
+}
+body[data-bs-theme="dark"] .message.sent .username {
+    color: var(--super-saiyan-blue); /* Mantener el color del username consistente */
+}
+
+
+/* Mensajes Recibidos (derecha) */
+.message.received {
+    align-self: flex-end;
+    margin-left: auto; /* Empuja a la derecha */
+}
+body[data-bs-theme="light"] .message.received {
+    background-color: var(--light-message-received-bg);
+    color: var(--light-message-received-text);
+    border-bottom-right-radius: 5px;
+}
+body[data-bs-theme="dark"] .message.received {
+    background-color: var(--dark-message-received-bg);
+    color: var(--dark-message-received-text);
+    border-bottom-right-radius: 5px;
+}
+
+
+/* Área de entrada de mensajes */
+.message-input-area {
+    border-radius: 8px; /* Para que coincida con .messages-area si es necesario */
+}
+
+.message-input-area input, .message-input-area button {
+    font-size: var(--font-size-lg); /* Letra más grande en el input */
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+}
+
+
+/* Scrollbar personalizado (opcional, para Webkit browsers) */
+.messages-area::-webkit-scrollbar {
+    width: 8px;
+}
+.messages-area::-webkit-scrollbar-track {
+    background: transparent; /* Hacerlo transparente para que se vea el fondo del messages-area */
+}
+.messages-area::-webkit-scrollbar-thumb {
+    background-color: var(--super-saiyan-blue);
+    border-radius: 10px;
+    border: 2px solid transparent; /* Para crear un efecto de padding */
+    background-clip: content-box;
+}
+body[data-bs-theme="dark"] .messages-area::-webkit-scrollbar-thumb {
+    background-color: var(--super-saiyan-blue); /* O un color que contraste bien en modo oscuro */
+}
+
+
+/* Estado de Conexión */
+#status.connected {
+    color: #198754; /* Verde Bootstrap */
+    font-weight: bold;
+}
+#status.disconnected {
+    color: #dc3545; /* Rojo Bootstrap */
+    font-weight: bold;
+}
+#status.connecting {
+    color: #ffc107; /* Amarillo Bootstrap */
+}
+body[data-bs-theme="dark"] #status.connected { color: #20c997; }
+body[data-bs-theme="dark"] #status.disconnected { color: #f77281; }
+body[data-bs-theme="dark"] #status.connecting { color: #ffd34d; }
+
+
+/* Iconos del toggle de tema */
+#themeToggle + label i.bi-moon-stars-fill { display: inline-block; }
+#themeToggle + label i.bi-sun-fill { display: none; }
+
+body[data-bs-theme="dark"] #themeToggle + label i.bi-moon-stars-fill { display: none; }
+body[data-bs-theme="dark"] #themeToggle + label i.bi-sun-fill { display: inline-block; }
