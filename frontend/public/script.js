@@ -34,25 +34,23 @@ document.addEventListener('DOMContentLoaded', () => {
             sendBtn.disabled = false;
             messageInput.disabled = false;
             // Opcional: Enviar un mensaje de "se ha unido"
-            // ws.send(JSON.stringify({ type: 'join', username: currentUsername }));
+            ws.send(JSON.stringify({ type: 'join', username: currentUsername }));
             console.log('Conectado al servidor WebSocket');
         };
 
         ws.onmessage = (event) => {
             try {
                 const msg = JSON.parse(event.data);
-                // Asegurarse que el mensaje tiene los campos esperados
                 if (msg.username && msg.text && msg.timestamp) {
                     addMessageToUI(msg.username, msg.text, msg.timestamp, msg.username === currentUsername);
-                } else if (msg.type === 'user_list') { // Ejemplo si quisieras lista de usuarios
+                } else if (msg.type === 'user_list') { 
                     // updateUserList(msg.users);
                 } else {
                     console.warn("Mensaje recibido con formato desconocido:", msg);
                 }
             } catch (error) {
                 console.error('Error al parsear mensaje:', error, event.data);
-                // Podrías añadir el mensaje crudo si no es JSON, por si el server envía texto plano
-                // addMessageToUI('System', event.data, new Date().toLocaleTimeString(), false);
+                
             }
         };
 
@@ -61,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
             statusDisplay.className = 'disconnected';
             sendBtn.disabled = true;
             messageInput.disabled = true;
-            setTimeout(connect, 3000); // Intentar reconectar cada 3 segundos
+            setTimeout(connect, 3000); // Se intenta reconectar cada 3 segundos
         };
 
         ws.onerror = (error) => {
@@ -119,8 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
             };
             ws.send(JSON.stringify(messagePayload));
             // Optimistic UI update: Se muestra el mensaje enviado inmediatamente.
-            // El servidor también lo enviará de vuelta, por lo que la condición 'isSentByCurrentUser' en onmessage es crucial.
-            // addMessageToUI(currentUsername, text, new Date().toLocaleTimeString(), true); // Esto causaría duplicados si el servidor echa para atrás el mensaje del propio usuario. Es mejor que el servidor sea la única fuente de verdad para los mensajes en el chat.
+            
             messageInput.value = '';
             messageInput.focus();
         } else {
@@ -183,16 +180,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Estado inicial: Mostrar pantalla de login
-    // Comprobar si ya hay un nombre de usuario guardado (opcional)
-    // const savedUsername = localStorage.getItem('chatUsername');
-    // if (savedUsername) {
-    //     currentUsername = savedUsername;
-    //     usernameInput.value = savedUsername; // Pre-fill
-    //     showChatScreen();
-    // } else {
+    
         showLoginScreen();
-    // }
 
     // Deshabilitar inputs de chat hasta que se conecte
     sendBtn.disabled = true;
