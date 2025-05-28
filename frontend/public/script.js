@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
         msgDiv.appendChild(timeSpan);
 
         messagesContainer.appendChild(msgDiv);
-        messagesContainer.scrollTop = messagesContainer.scrollHeight; // Auto-scroll
+        messagesContainer.scrollTop = messagesContainer.scrollHeight; // Para el Auto-scroll
     }
 
     function sendMessage() {
